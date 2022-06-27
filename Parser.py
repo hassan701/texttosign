@@ -1,5 +1,5 @@
 from tokens import TokenType
-Dic = {"please","all done","good night","be careful","good morning","i love you","thank you", "you are welcome", "hello"}
+Dic = {"please","all done","good night","be careful","good morning","i love you","thank you", "you are welcome", "hello", "hi"}
 
 class Parser:
     def __init__(self, tokens):

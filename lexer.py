@@ -23,12 +23,18 @@ class Lexer:
     
     
     def genTokens(self):
+        Scounter = 0
         while self.currentChar != None:
             if self.currentChar in WHITESPACE:
+                Lcounter=0 
                 self.advance()
             elif self.checkChar():
+                Scounter=0
                 yield self.genWord()
             elif self.currentChar in SYMBOL:
+                Scounter+=1
+                if Scounter>=2:
+                    raise Exception(f"Two consencative Symbols:") 
                 yield Token(TokenType.EOS)
                 self.advance()
             else:
@@ -47,7 +53,12 @@ class Lexer:
         
         if self.dic.check(word):
             if word in CONJUNCTION:
-                return Token(TokenType.EOS, word)
+                    return Token(TokenType.EOS, word)
+            elif len(word) == 1:
+                if word == "i" or  word == "a":
+                    return Token(TokenType.Word, word)
+                else:
+                    raise Exception(f"Single charchter world inputed!")  
             else:
                 return Token(TokenType.Word, word)
         else:
